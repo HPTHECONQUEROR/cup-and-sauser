@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useContext } from "react";
-
+import arrow from '../assets/arrow.svg';
 import Counter from '../components/counter';
 import Header from './Header';
 import ThemeContext from "../Themes/ThemeContext";
@@ -9,6 +9,7 @@ import ThemeContext from "../Themes/ThemeContext";
 
 export default function NavigationBar() {
     const { theme } = useContext(ThemeContext);
+    const headRef = useRef(null);
     const aboutRef = useRef(null);
     const counterRef = useRef(null);
     const contactRef = useRef(null);
@@ -20,11 +21,10 @@ export default function NavigationBar() {
 
     return (
         <div style={{ backgroundColor: theme === 'dark' ? 'white' : '#242424',color:theme === 'dark' ? 'black' : 'white'}}>
-            <nav>
-                <a  href="#about" class="link-underline-primary" onClick={scrollToSection(aboutRef)}>   About us   </a>
-                <a   href="#count" class="link-underline-primary" onClick={scrollToSection(counterRef)}>   Buying page   </a>
-                <a href="#contact"  class="link-underline-primary" onClick={scrollToSection(contactRef)}>    Contact    </a>
-            </nav>
+            <div ref={headRef}>
+                <Header/>
+            </div>
+           
             <div style={{paddingLeft:"40vh", paddingTop:"10vh", paddingBottom:"12vh"}}>
                 <figure class="text-end">
                     <blockquote style={{fontSize:"3vh"}} class="blockquote">
@@ -73,7 +73,18 @@ export default function NavigationBar() {
                     <h3>Website</h3>
                     <p>Visit our website for more information and to explore our tea collection: <a href="http://www.cupandsauser.com" target="_blank" rel="noopener noreferrer">www.cupandsauser.com</a></p>
                 </div>
+                
             </div>
+
+            <footer style={{ position: 'fixed', bottom: '100px', right: '100px' }}>
+                <img
+                    src={arrow} // Use the imported SVG here
+                    onClick={scrollToSection(headRef)}
+                    alt="Scroll to top"
+                    style={{ cursor: 'pointer', width: '30px', height: '30px' }}
+                />
+            </footer>
+
         </div>
     );
 }

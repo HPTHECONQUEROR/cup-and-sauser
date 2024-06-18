@@ -6,7 +6,6 @@ import NavigationBar from "./components/NavigationBar";
 function App() {
     return (
         <ThemeProvider>
-            <Header />
             <ThemeConsumer />
             <NavigationBar/>
         </ThemeProvider>
